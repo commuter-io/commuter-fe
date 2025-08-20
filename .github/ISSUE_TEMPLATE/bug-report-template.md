@@ -1,4 +1,13 @@
 ---
+name: bug report template
+about: Describe this issue template's purpose here.
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+---
 name: Issue(Bug) Template
 about:
 title: 버그 내용 요약작성

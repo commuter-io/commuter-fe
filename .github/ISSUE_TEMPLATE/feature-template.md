@@ -1,4 +1,13 @@
 ---
+name: feature template
+about: 기본 이슈 템플릿
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+---
 name: Issue(Feature) Template
 about:
 title: 새로 구현할 기능명
