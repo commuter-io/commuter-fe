@@ -1,0 +1,5 @@
+# config
+eslint.config.mjs
+postcss.config.mjs
+tailwind.config.ts
+tsconfig.json
