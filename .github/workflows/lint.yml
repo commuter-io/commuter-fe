@@ -10,9 +10,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
       - run: npm ci
         working-directory: ./
-      - run: npx next lint
+      - run: npm run lint
         working-directory: ./
       - run: npm run check:format
         working-directory: ./
