@@ -11,5 +11,8 @@ jobs:
         with:
           node-version: "18"
       - run: npm ci
+        working-directory: ./
       - run: npx next lint
+        working-directory: ./
       - run: npm run check:format
+        working-directory: ./
