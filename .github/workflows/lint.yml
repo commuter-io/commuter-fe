@@ -11,5 +11,5 @@ jobs:
         with:
           node-version: "18"
       - run: npm ci
-      - run: npx next lint --no-interactive
+      - run: npx next lint
       - run: npm run check:format
