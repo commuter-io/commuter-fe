@@ -32,6 +32,7 @@ const eslintConfig = [
     plugins: {
       import: importPlugin,
       "react-hooks": reactHooks,
+      "@typescript-eslint": tseslint,
     },
     rules: {
       // Import 규칙
