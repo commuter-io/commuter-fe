@@ -1,6 +1,8 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import importPlugin from "eslint-plugin-import";
 import reactHooks from "eslint-plugin-react-hooks";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import parser from "@typescript-eslint/parser";
 
 const compat = new FlatCompat({
   baseDirectory: process.cwd(),
@@ -12,16 +14,34 @@ const eslintConfig = [
 
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      parser, // TypeScript 파서 사용
+      parserOptions: {
+        ecmaVersion: "latest", // 최신 ECMAScript 기능 지원
+        sourceType: "module", // ES 모듈 사용
+        ecmaFeatures: {
+          jsx: true, // JSX 지원 (명시적)
+        },
+        // project: "./tsconfig.json", // TypeScript 프로젝트 설정 파일 (필요시 활성화)
+      },
+      globals: {
+        React: "writable", // React를 전역 변수로 설정 (Next.js에서 필요)
+        JSX: "writable", // JSX 네임스페이스를 전역 변수로 설정
+      },
+    },
     plugins: {
       import: importPlugin,
       "react-hooks": reactHooks,
+      "@typescript-eslint": tseslint,
     },
     rules: {
       // Import 규칙
       "import/order": [
         "warn",
         {
-          "newlines-between": "always"
+          "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+          "newlines-between": "always",
+          "alphabetize": { "order": "asc", "caseInsensitive": true }
         }],
       "import/no-unresolved": "error",
       "import/no-duplicates": "error",
@@ -43,7 +63,6 @@ const eslintConfig = [
           varsIgnorePattern: "^_",
         }],
       "@typescript-eslint/no-explicit-any": "warn", // any 타입 사용 경고
-      "prefer-const": "error", // let 대신 const 사용 권장
 
       // 일반 JavaScript 규칙
       "no-console": [
@@ -53,6 +72,12 @@ const eslintConfig = [
         }], // console.warn, console.error는 허용
       "prefer-const": "error", // let 대신 const 사용 권장
       "no-var": "error", // var 사용 금지
+      "no-param-reassign": [
+        "error",
+        {
+          props: true,
+        }
+      ],
 
       // Next.js 규칙
       "@next/next/no-img-element": "error", // img 태그 대신 next/image 사용 권장
@@ -75,9 +100,7 @@ const eslintConfig = [
       "**/dist/**",
       "**/build/**",
       "**/coverage/**",
-      "**/public/static/**",
-      "**/public/assets/**",
-      "**/public/images/**",
+      "**/public/**",
       "README.md",
       "postcss.config.mjs",
       "tailwind.config.ts",
