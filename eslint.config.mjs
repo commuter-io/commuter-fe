@@ -3,6 +3,7 @@ import importPlugin from "eslint-plugin-import";
 import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import parser from "@typescript-eslint/parser";
+import tailwindcss from "eslint-plugin-tailwindcss";
 
 const compat = new FlatCompat({
   baseDirectory: process.cwd(),
@@ -33,6 +34,7 @@ const eslintConfig = [
       import: importPlugin,
       "react-hooks": reactHooks,
       "@typescript-eslint": tseslint,
+      tailwindcss: tailwindcss,
     },
     rules: {
       // Import 규칙
@@ -82,6 +84,10 @@ const eslintConfig = [
       // Next.js 규칙
       "@next/next/no-img-element": "error", // img 태그 대신 next/image 사용 권장
       "@next/next/no-html-link-for-pages": "error", // next/link 사용 권장
+
+      // Tailwind CSS 규칙
+      "tailwindcss/classnames-order": "warn", // Tailwind 클래스명 순서 경고
+      "tailwindcss/no-custom-classname": "off", // 커스텀 클래스명 사용 경고
     },
     settings: {
       react: {
