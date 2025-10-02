@@ -104,8 +104,8 @@ const eslintConfig = [
         typescript: {}, // TypeScript 지원
       },
       "better-tailwindcss": {
-        entryPoint: "src/styles/globals.css", // Tailwind CSS 진입점 파일 경로 명시
-        tailwindConfig: "tailwind.config.ts", // Tailwind CSS 설정 파일 경로 명시
+        entryPoint: path.resolve(__dirname, "src/styles/globals.css"), // Tailwind CSS 진입점 파일 경로 명시
+        tailwindConfig: path.resolve(__dirname, "tailwind.config.ts"), // Tailwind CSS 설정 파일 경로 명시
       },
     },
   },
