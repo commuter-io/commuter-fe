@@ -31,6 +31,9 @@ jobs:
     needs: assign
     runs-on: ubuntu-latest
     steps:
+      - name: 🧐 Debug assign output
+        run: echo "The assigned reviewer is ${{ needs.assign.outputs.reviewer }}"
+
       - name: Map GitHub username to Slack ID
         id: get_slack_id
         run: |
