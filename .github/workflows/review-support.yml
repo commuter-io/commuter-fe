@@ -19,7 +19,7 @@ jobs:
 
       # 2. 리뷰어 자동 할당 (kentaro-m/auto-assign 사용)
       - name: Assign Reviewer
-        uses: kentaro-m/auto-assign@v2.0.0
+        uses: kentaro-m/auto-assign@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
