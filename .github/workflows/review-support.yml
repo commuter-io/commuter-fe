@@ -2,28 +2,43 @@ name: PR Review Notification
 
 on:
   pull_request:
-    types: [opened, ready_for_review, reopened] # PR이 열리거나 '리뷰 준비' 상태가 될 때 실행
+    types: [opened, ready_for_review, reopened]
+
+permissions:
+  pull-requests: write
+
 jobs:
-  assign-and-notify:
+  # 첫 번째 Job: 리뷰어 자동 할당
+  assign:
+    name: Assign Reviewer
     runs-on: ubuntu-latest
+    outputs:
+      reviewer: ${{ steps.assign_reviewer.outputs.reviewer }}
     steps:
-      - name: Assign Reviewer
+      - name: Assign one reviewer
         id: assign_reviewer
-        uses: pull-request-assigner/github-action@v6.2.0
+        uses: hkusu/review-assign-action@v1
         with:
-          # PR을 생성한 사람은 자동으로 제외
-          assignees: |
+          reviewers: |
             subin4420
             s-eun20
             minjeongj0
             yesslee
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+  # 두 번째 Job: 할당된 리뷰어에게 Slack 알림 전송
+  notify:
+    name: Notify Reviewer on Slack
+    # 'assign' Job이 성공적으로 끝나야 실행됨
+    needs: assign
+    # 'assign' Job에서 리뷰어가 성공적으로 출력되었을 때만 이 Job을 실행
+    if: needs.assign.outputs.reviewer != ''
+    runs-on: ubuntu-latest
+    steps:
       - name: Map GitHub username to Slack ID
         id: get_slack_id
-        if: steps.assign_reviewer.outputs.assignees_json != '[]' # 리뷰어가 할당된 경우에만 실행
         run: |
-          REVIEWER_GH_USERNAME=$(echo '${{ steps.assign_reviewer.outputs.assignees_json }}' | jq -r '.[0]')
+          REVIEWER_GH_USERNAME="${{ needs.assign.outputs.reviewer }}"
           echo "Assigned reviewer: $REVIEWER_GH_USERNAME"
 
           USER_MAP=$(cat <<-EOF
@@ -40,12 +55,12 @@ jobs:
           echo "slack_id=$SLACK_USER_ID" >> "$GITHUB_OUTPUT"
 
       - name: Send Slack Notification
-        if: steps.get_slack_id.outputs.slack_id != '' # 리뷰어가 할당된 경우에만 실행
+        if: steps.get_slack_id.outputs.slack_id != ''
         uses: slackapi/slack-github-action@v1.25.0
         with:
-          channel-id: "C09JB820MFF" # 알림을 보낼 채널 ID
+          channel-id: "C09JB820MFF"
           slack-message: |
-            "<@${{ steps.get_slack_id.outputs.slack_id }}> 📬 새로운 PR 리뷰 요청이 도착했습니다!
-            👉 <${{ github.event.pull_request.html_url }}|*${{ github.event.pull_request.title }}*>"
+            <@${{ steps.get_slack_id.outputs.slack_id }}> 새로운 PR 리뷰 요청이 도착했습니다!
+            👉 <${{ github.event.pull_request.html_url }}|*${{ github.event.pull_request.title }}*>
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
