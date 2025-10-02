@@ -56,7 +56,7 @@ jobs:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.25.0
         with:
-          channel-id: ${{ steps.get_slack_id.outputs.slack_id }}
-          slack-message: "📬 새로운 PR 리뷰 요청이 도착했습니다! 👉 <${{ github.event.pull_request.html_url }}|*${{ github.event.pull_request.title }}*>"
+          channel-id: "C09JB820MFF" # 알림을 보낼 채널 ID
+          slack-message: "<@${{ steps.get_slack_id.outputs.slack_id }}> 📬 새로운 PR 리뷰 요청이 도착했습니다! 👉 <${{ github.event.pull_request.html_url }}|*${{ github.event.pull_request.title }}*>"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
