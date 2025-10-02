@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import {
 	HiHome,
 	HiExclamationTriangle,
-	HiMegaphone,
+	// HiMegaphone,
 	HiChatBubbleOvalLeftEllipsis,
 	HiUserCircle,
 } from "react-icons/hi2";
@@ -44,7 +44,7 @@ export default function TabBar() {
 
 	return (
 		<nav
-			className="pb-safe-bottom fixed bottom-0 z-10 flex h-16 w-full max-w-[400px] items-center justify-around rounded-t-2xl bg-white"
+			className={`pb-safe-bottom fixed bottom-0 z-10 flex h-16 w-full max-w-[400px] items-center justify-around rounded-t-2xl bg-white`}
 			style={{ boxShadow: "0 -4px 6px -1px rgba(0, 0, 0, 0.1)" }}
 		>
 			{TABS.map(tab => {
