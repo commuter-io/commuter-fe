@@ -38,6 +38,7 @@ jobs:
           echo "Reviewer GitHub Username: $REVIEWER_GH_USERNAME"
 
           USER_MAP=$(cat <<-EOF
+          {
             "subin4420": "U098VUTEBU4",
             "s-eun20": "U099N6W3K40",
             "minjeongj0": "U0991TXEKDJ",
