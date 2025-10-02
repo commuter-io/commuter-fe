@@ -36,11 +36,16 @@ jobs:
         run: |
           REVIEWER_GH_USERNAME="${{ needs.assign.outputs.reviewer }}"
           echo "Reviewer GitHub Username: $REVIEWER_GH_USERNAME"
+
+          USER_MAP=$(cat <<-EOF)
             "subin4420": "U098VUTEBU4",
             "s-eun20": "U099N6W3K40",
             "minjeongj0": "U0991TXEKDJ",
             "yesslee": "U098R2VUC11",
-          }'
+          }
+          EOF
+          )
+
           SLACK_USER_ID=$(echo "$USER_MAP" | jq -r --arg REVIEWER "$REVIEWER_GH_USERNAME" '.[$REVIEWER]')
           echo "slack_id=$SLACK_USER_ID" >> "$GITHUB_OUTPUT"
 
