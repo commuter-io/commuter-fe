@@ -1,3 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 echo "🔍 commit 이전에 lint 규칙과 prettier를 적용합니다..."
 
 if npx lint-staged; then
