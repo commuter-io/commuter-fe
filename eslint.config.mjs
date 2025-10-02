@@ -4,11 +4,6 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import parser from "@typescript-eslint/parser";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: process.cwd(),
@@ -104,8 +99,8 @@ const eslintConfig = [
         typescript: {}, // TypeScript 지원
       },
       "better-tailwindcss": {
-        entryPoint: path.resolve(__dirname, "src/styles/globals.css"), // Tailwind CSS 진입점 파일 경로 명시
-        tailwindConfig: path.resolve(__dirname, "tailwind.config.ts"), // Tailwind CSS 설정 파일 경로 명시
+        entryPoint: "src/styles/globals.css", // Tailwind CSS 진입점 파일 경로 명시
+        tailwindConfig: "tailwind.config.ts", // Tailwind CSS 설정 파일 경로 명시
       },
     },
   },
