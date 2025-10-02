@@ -2,7 +2,7 @@ name: PR Review Notification
 
 on:
   pull_request:
-    types: [opened, ready_for_review] # PR이 열리거나 '리뷰 준비' 상태가 될 때 실행
+    types: [opened, ready_for_review, reopened] # PR이 열리거나 '리뷰 준비' 상태가 될 때 실행
 jobs:
   # 첫 번째 Job: 리뷰어 자동 할당
   assign:
