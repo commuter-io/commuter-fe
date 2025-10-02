@@ -1,0 +1,5 @@
+// src/app/mypage/page.tsx
+
+export default function MyPage() {
+	return <div>내 정보</div>;
+}

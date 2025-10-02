@@ -1,3 +1,9 @@
+// src/app/page.tsx
+
 export default function Home() {
-	return <div className="bg-blue-500 text-white p-4">Tailwind 작동 테스트</div>;
+	return (
+		<div>
+			홈<div>여기는 홈 입니다.</div>
+		</div>
+	);
 }
