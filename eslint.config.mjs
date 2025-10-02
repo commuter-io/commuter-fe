@@ -3,7 +3,7 @@ import importPlugin from "eslint-plugin-import";
 import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import parser from "@typescript-eslint/parser";
-import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
+import tailwindcssPlugin from "eslint-plugin-tailwindcss";
 
 const compat = new FlatCompat({
   baseDirectory: process.cwd(),
@@ -12,6 +12,8 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // Next.js + TypeScript + Prettier
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  // Tailwind CSS Plugin Recommended
+  ...tailwindcssPlugin.configs["flat/recommended"],
 
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
@@ -34,7 +36,7 @@ const eslintConfig = [
       import: importPlugin,
       "react-hooks": reactHooks,
       "@typescript-eslint": tseslint,
-      "better-tailwindcss": eslintPluginBetterTailwindcss,
+      "tailwindcss": tailwindcssPlugin,
     },
     rules: {
       // Import 규칙
@@ -85,14 +87,9 @@ const eslintConfig = [
       "@next/next/no-img-element": "error", // img 태그 대신 next/image 사용 권장
       "@next/next/no-html-link-for-pages": "error", // next/link 사용 권장
 
-      // Tailwind CSS 규칙
-      "better-tailwindcss/enforce-consistent-class-order": ["warn", {
-        order: "official",
-        callees: ["cn", "cva", "clsx"],
-      }], // Tailwind CSS 클래스 정렬 순서 기본값 적용
-      "better-tailwindcss/no-duplicate-classes": "error", // 중복된 Tailwind CSS 클래스 금지
-      "better-tailwindcss/no-unnecessary-whitespace": "warn", // 불필요한 공백 금지
-
+      // Tailwind CSS 규칙 (Recommended에 포함된 설정을 일부 커스텀)
+      "tailwindcss/classnames-order": "warn", // 클래스 순서 경고
+      "tailwindcss/no-custom-classname": "off", // 커스텀 클래스명 사용 허용
     },
     settings: {
       react: {
@@ -101,7 +98,6 @@ const eslintConfig = [
       "import/resolver": {
         typescript: {}, // TypeScript 지원
       },
-      "tailwindcss/config": "./tailwind.config.ts",
     },
   },
   {
