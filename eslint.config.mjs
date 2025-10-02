@@ -4,6 +4,11 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import parser from "@typescript-eslint/parser";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: process.cwd(),
@@ -91,10 +96,6 @@ const eslintConfig = [
       "better-tailwindcss/no-unnecessary-whitespace": "warn", // 불필요한 공백 금지
 
     },
-    "better-tailwindcss": {
-      entryPoint: "src/styles/globals.css", // Tailwind CSS 진입점 파일 경로 명시
-      tailwindConfig: "tailwind.config.ts", // Tailwind CSS 설정 파일 경로 명시
-    },
     settings: {
       react: {
         version: "detect", // React 버전을 자동으로 감지
@@ -102,7 +103,10 @@ const eslintConfig = [
       "import/resolver": {
         typescript: {}, // TypeScript 지원
       },
-
+      "better-tailwindcss": {
+        entryPoint: "src/styles/globals.css", // Tailwind CSS 진입점 파일 경로 명시
+        tailwindConfig: "tailwind.config.ts", // Tailwind CSS 설정 파일 경로 명시
+      },
     },
   },
   {
