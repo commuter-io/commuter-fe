@@ -86,7 +86,7 @@ const eslintConfig = [
       "@next/next/no-html-link-for-pages": "error", // next/link 사용 권장
 
       // Tailwind CSS 규칙
-      "better-tailwindcss/enforce-consistent-class-order": "warn", // Tailwind CSS 클래스 순서 일관성 강제
+      "better-tailwindcss/enforce-consistent-class-order": "official", // Tailwind CSS 클래스 기본 정렬 순서 사용
       "better-tailwindcss/no-duplicate-classes": "error", // 중복된 Tailwind CSS 클래스 금지
       "better-tailwindcss/no-unnecessary-whitespace": "warn", // 불필요한 공백 금지
 
