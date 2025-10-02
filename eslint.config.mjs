@@ -98,6 +98,7 @@ const eslintConfig = [
       "import/resolver": {
         typescript: {}, // TypeScript 지원
       },
+      "tailwindcss/config": "./tailwind.config.ts",
     },
   },
   {
