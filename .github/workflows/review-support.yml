@@ -19,11 +19,8 @@ jobs:
         id: assign_reviewer
         uses: hkusu/review-assign-action@v1
         with:
-          reviewers: |
-            subin4420
-            s-eun20
-            minjeongj0
-            yesslee
+          reviewers: ${{ vars.REVIEWERS }}
+          num-of-reviewers: 1
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   # 두 번째 Job: 할당된 리뷰어에게 Slack 알림 전송
