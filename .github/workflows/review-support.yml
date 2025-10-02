@@ -1,4 +1,4 @@
-name: PR Review Notification
+name: Assign Reviewer and Notify
 
 on:
   pull_request:
@@ -6,37 +6,39 @@ on:
 
 permissions:
   pull-requests: write
+  contents: read # checkout을 위해 추가
 
 jobs:
-  # 첫 번째 Job: 리뷰어 자동 할당
-  assign:
-    name: Assign Reviewer
+  assign-and-notify:
+    name: Assign and Notify Reviewer
     runs-on: ubuntu-latest
-    outputs:
-      reviewer: ${{ steps.assign_reviewer.outputs.reviewer }}
     steps:
-      - name: Assign one reviewer
-        id: assign_reviewer
-        uses: hkusu/review-assign-action@v1
-        with:
-          reviewers: ${{ vars.REVIEWERS }}
-          num-of-reviewers: 1
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # 1. 코드 체크아웃 (git checkout)
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  # 두 번째 Job: 할당된 리뷰어에게 Slack 알림 전송
-  notify:
-    name: Notify Reviewer on Slack
-    # 'assign' Job이 성공적으로 끝나야 실행됨
-    needs: assign
-    # 'assign' Job에서 리뷰어가 성공적으로 출력되었을 때만 이 Job을 실행
-    if: needs.assign.outputs.reviewer != ''
-    runs-on: ubuntu-latest
-    steps:
+      # 2. 리뷰어 자동 할당 (kentaro-m/auto-assign 사용)
+      - name: Assign Reviewer
+        uses: kentaro-m/auto-assign@v2.0.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3. 할당된 리뷰어 정보 가져오기 (GitHub CLI 사용)
+      - name: Get Assigned Reviewer
+        id: get_reviewer
+        run: |
+          REVIEWER_GH_USERNAME=$(gh pr view ${{ github.event.number }} --json reviewers --jq '.reviewers[0].login')
+          echo "Found reviewer: $REVIEWER_GH_USERNAME"
+          echo "reviewer=$REVIEWER_GH_USERNAME" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 4. Slack ID 매핑
       - name: Map GitHub username to Slack ID
         id: get_slack_id
+        if: steps.get_reviewer.outputs.reviewer != ''
         run: |
-          REVIEWER_GH_USERNAME="${{ needs.assign.outputs.reviewer }}"
-          echo "Assigned reviewer: $REVIEWER_GH_USERNAME"
+          REVIEWER_GH_USERNAME="${{ steps.get_reviewer.outputs.reviewer }}"
 
           USER_MAP=$(cat <<-EOF
           {
@@ -51,11 +53,12 @@ jobs:
           SLACK_USER_ID=$(echo "$USER_MAP" | jq -r --arg REVIEWER "$REVIEWER_GH_USERNAME" '.[$REVIEWER]')
           echo "slack_id=$SLACK_USER_ID" >> "$GITHUB_OUTPUT"
 
+      # 5. 슬랙 알림 전송
       - name: Send Slack Notification
         if: steps.get_slack_id.outputs.slack_id != ''
         uses: slackapi/slack-github-action@v1.25.0
         with:
-          channel-id: "C09JB820MFF"
+          channel-id: "C09JB820MFF" # 실제 알림을 보낼 채널 ID
           slack-message: |
             <@${{ steps.get_slack_id.outputs.slack_id }}> 새로운 PR 리뷰 요청이 도착했습니다!
             👉 <${{ github.event.pull_request.html_url }}|*${{ github.event.pull_request.title }}*>

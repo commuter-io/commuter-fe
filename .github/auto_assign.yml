@@ -1,0 +1,7 @@
+# PR을 연 사람을 제외하고 리뷰어 목록에서 한 명을 무작위로 선택
+reviewers:
+  - subin4420
+  - s-eun20
+  - minjeongj0
+  - yesslee
+numberOfReviewers: 1
