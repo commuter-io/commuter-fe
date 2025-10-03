@@ -1,8 +1,13 @@
+/* src/styles/globals.css */
+
 @import "tailwindcss";
 
 :root {
+	--vh: 100%;
 	--background: #ffffff;
 	--foreground: #171717;
+	--commuter-color: #ff892c;
+	--font-seoul-alrim: "SeoulAlrim", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,11 +20,21 @@
 body {
 	color: var(--foreground);
 	background: var(--background);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: var(--font-seoul-alrim);
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 @layer utilities {
 	.text-balance {
 		text-wrap: balance;
+	}
+
+	.min-h-screen-vh {
+		min-height: 100vh;
+		min-height: calc(
+			var(--vh, 1vh) * 100
+		); /* Footer 존재하는 경우 100 + Footer 높이로 변경 */
 	}
 }
