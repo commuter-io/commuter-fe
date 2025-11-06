@@ -2,10 +2,12 @@
 
 "use client";
 
-import { Image as ImageIcon } from "lucide-react";
+import { Image as ImageIcon, ClipboardPen, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef } from "react";
 import { HiXMark } from "react-icons/hi2";
 
+import { ActionDrawer } from "@/components/ActionDrawer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -25,6 +27,9 @@ interface PreviewImage {
 }
 
 export default function CommunityPost() {
+	// 라우팅 제어
+	const router = useRouter();
+
 	// 텍스트 입력 위한 state
 	const [title, setTitle] = useState<string>("");
 	const [content, setContent] = useState<string>("");
@@ -62,11 +67,48 @@ export default function CommunityPost() {
 		URL.revokeObjectURL(urlToRemove);
 	};
 
+	// 임시저장 모달(Drawer) 관리하기 위한 상태
+	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+	// 커뮤니티 게시글 작성 취소 클릭 핸들러
+	// 제목/내용 입력된 경우 임시저장 모달 띄우고 아닌 경우 이전 페이지로 이동
+	const handleCancelClick = () => {
+		if (title.trim().length > 0 || content.trim().length > 0) {
+			setIsDrawerOpen(true);
+		} else {
+			router.back();
+		}
+	};
+
+	// 임시저장 모달에서 사용할 액션 목록
+	const cancelActions = [
+		{
+			label: "삭제",
+			variant: "ghost" as const,
+			icon: <Trash2 className="h-5 w-5 text-red-500" />,
+			onClick: () => {
+				console.log("삭제 로직 실행");
+				router.back();
+			},
+			className: "h-14 text-lg justify-start text-red-500 hover:text-red-500",
+		},
+		{
+			label: "임시저장",
+			variant: "ghost" as const,
+			icon: <ClipboardPen className="h-5 w-5 text-gray-500" />,
+			onClick: () => {
+				console.log("임시저장 로직 실행");
+				router.back();
+			},
+			className: "h-14 text-lg justify-start text-black",
+		},
+	];
+
 	return (
 		<div className="flex h-full w-full flex-col">
 			{/* 상단 헤더 */}
 			<div className="flex items-center justify-between p-2">
-				<Button variant="ghost" size="icon">
+				<Button variant="ghost" size="icon" onClick={handleCancelClick}>
 					<HiXMark className="h-6 w-6" />
 				</Button>
 				<Button
@@ -164,6 +206,12 @@ export default function CommunityPost() {
 					/>
 				</div>
 			</div>
+
+			<ActionDrawer
+				isOpen={isDrawerOpen}
+				onOpenChange={setIsDrawerOpen}
+				actions={cancelActions}
+			/>
 		</div>
 	);
 }
