@@ -87,7 +87,7 @@ export default function CommunityPost() {
 			variant: "ghost" as const,
 			icon: <Trash2 className="h-5 w-5 text-red-500" />,
 			onClick: () => {
-				console.log("삭제 로직 실행");
+				// console.log("삭제 로직 실행");
 				router.back();
 			},
 			className: "h-14 text-lg justify-start text-red-500 hover:text-red-500",
@@ -97,7 +97,7 @@ export default function CommunityPost() {
 			variant: "ghost" as const,
 			icon: <ClipboardPen className="h-5 w-5 text-gray-500" />,
 			onClick: () => {
-				console.log("임시저장 로직 실행");
+				// console.log("임시저장 로직 실행");
 				router.back();
 			},
 			className: "h-14 text-lg justify-start text-black",
