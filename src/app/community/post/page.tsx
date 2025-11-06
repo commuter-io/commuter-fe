@@ -2,8 +2,7 @@
 
 "use client";
 
-import { Image as ImageIcon } from "lucide-react";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 
 import { Button } from "@/components/ui/button";
@@ -18,12 +17,6 @@ const TEXTS = {
 	completeButton: "완료",
 };
 
-// 이미지 파일과 미리보기 URL을 저장할 인터페이스
-interface PreviewImage {
-	file: File;
-	url: string;
-}
-
 export default function CommunityPost() {
 	// 텍스트 입력 위한 state
 	const [title, setTitle] = useState<string>("");
@@ -31,36 +24,6 @@ export default function CommunityPost() {
 
 	// 게시글 완료 버튼 활성화 조건
 	const isFormValid = title.trim().length > 0 && content.trim().length > 0;
-
-	// 여러 이미지를 관리하기 위한 상태
-	const [selectedImages, setSelectedImages] = useState<PreviewImage[]>([]);
-	const fileInputRef = useRef<HTMLInputElement>(null);
-
-	// 이미지 파일 선택 핸들러
-	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) {
-			const files = Array.from(e.target.files);
-
-			const newImages: PreviewImage[] = files.map(file => ({
-				file,
-				url: URL.createObjectURL(file),
-			}));
-
-			setSelectedImages(prevImages => [...prevImages, ...newImages]);
-
-			if (fileInputRef.current) {
-				fileInputRef.current.value = "";
-			}
-		}
-	};
-
-	// 이미지 미리보기 제거 핸들러
-	const handleRemoveImage = (urlToRemove: string) => {
-		setSelectedImages(prevImages =>
-			prevImages.filter(image => image.url !== urlToRemove)
-		);
-		URL.revokeObjectURL(urlToRemove);
-	};
 
 	return (
 		<div className="flex h-full w-full flex-col">
@@ -110,59 +73,6 @@ export default function CommunityPost() {
 					value={content}
 					onChange={e => setContent(e.target.value)}
 				></textarea>
-			</div>
-
-			{/* 이미지 미리보기 영역 */}
-			{selectedImages.length > 0 && (
-				<div className="flex w-full flex-row gap-2 overflow-x-auto p-4">
-					{selectedImages.map(image => (
-						<div
-							key={image.url}
-							className="relative aspect-square w-16 shrink-0"
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src={image.url}
-								alt="미리보기"
-								className="h-full w-full rounded-md object-cover"
-							/>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-black/50 text-white hover:bg-black/70"
-								onClick={() => handleRemoveImage(image.url)}
-							>
-								<HiXMark className="h-4 w-4" />
-							</Button>
-						</div>
-					))}
-				</div>
-			)}
-
-			{/* 하단 기능 버튼 (모바일 키보드 위에 올라와야 함) */}
-			<div className="overscroll-contain">
-				<Separator />
-				<div className="flex items-center px-4 py-2">
-					{/* 이미지 첨부 버튼 */}
-					<Button asChild variant="ghost" className="h-auto p-2">
-						<label
-							htmlFor="imageUpload"
-							className="flex cursor-pointer items-center gap-1 text-gray-600 hover:text-gray-900"
-						>
-							<ImageIcon className="h-5 w-5" aria-hidden="true" />
-							<span>{TEXTS.attachImage}</span>
-						</label>
-					</Button>
-					<input
-						type="file"
-						id="imageUpload"
-						ref={fileInputRef}
-						className="sr-only"
-						accept="image/*"
-						onChange={handleFileChange}
-						multiple // 여러 파일 선택 허용
-					/>
-				</div>
 			</div>
 		</div>
 	);
