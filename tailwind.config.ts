@@ -14,7 +14,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        commuter: "var(--commuter-color)",
+        // commuter: "var(--commuter-color)",
       },
       // ios safe area 대응
       spacing: {
