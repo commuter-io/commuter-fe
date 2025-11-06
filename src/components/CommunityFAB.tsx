@@ -18,10 +18,10 @@ export default function CommunityFAB() {
 			<PopoverTrigger asChild>
 				<Button
 					variant="default"
-					size="icon"
+					size="iconLg"
 					className="pointer-events-auto absolute right-6 bottom-20 z-50 rounded-full shadow-lg"
 				>
-					<HiPencil />
+					<HiPencil className="h-6 w-6" />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="mb-2 w-auto p-2" side="top" align="end">
