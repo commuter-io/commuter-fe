@@ -44,7 +44,7 @@ export default function TabBar() {
 
 	return (
 		<nav
-			className={`pb-safe-bottom fixed bottom-0 z-10 flex h-16 w-full max-w-[400px] items-center justify-around rounded-t-2xl bg-white`}
+			className={`pb-safe-bottom bottom-0 z-10 flex h-16 w-full items-center justify-around rounded-t-2xl bg-white`}
 			style={{ boxShadow: "0 -4px 6px -1px rgba(0, 0, 0, 0.1)" }}
 		>
 			{TABS.map(tab => {
@@ -57,7 +57,7 @@ export default function TabBar() {
 						href={tab.href}
 						// 활성화된 탭에 대해 다른 스타일 적용
 						className={`mx-4 flex w-full flex-col items-center justify-center gap-1 ${
-							isActive ? "font-bold text-(--commuter-color)" : "text-gray-400"
+							isActive ? "text-commuter font-bold" : "text-gray-400"
 						}`}
 					>
 						{isActive ? tab.activeIcon : tab.icon}
