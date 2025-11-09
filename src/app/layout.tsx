@@ -2,9 +2,7 @@
 
 import localFont from "next/font/local";
 
-import Header from "@/components/@common/Header";
-import SetVH from "@/components/@common/SetVH";
-import TabBar from "@/components/@common/TabBar";
+import ClientLayout from "@/components/ClientLayout";
 
 import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
@@ -32,16 +30,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${seoulAlrim.variable} flex w-full max-w-[400px] flex-col items-center justify-around bg-white antialiased`}
-			>
-				<SetVH />
-				<Header />
-				{/* Header, TabBar 클래스(h-숫자) 변경에 따라 메인 레이아웃 mt(헤더), mb(탭바) 크기 변경 필요 */}
-				<main className="min-h-screen-vh relative mt-12 mb-16 w-full max-w-[400px] px-4 py-4">
-					{children}
-				</main>
-				<TabBar />
+			<body className={`${seoulAlrim.variable} bg-white antialiased`}>
+				<ClientLayout>{children}</ClientLayout>
 			</body>
 		</html>
 	);
