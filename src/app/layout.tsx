@@ -6,6 +6,7 @@ import ClientLayout from "@/components/ClientLayout";
 
 import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
+import "../styles/line-colors.css";
 
 const seoulAlrim = localFont({
 	src: "../assets/fonts/SeoulAlrim-Medium.otf",
