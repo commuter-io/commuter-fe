@@ -59,27 +59,6 @@ body {
 	.text-balance {
 		text-wrap: balance;
 	}
-	.scrollbar-hide {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
-	.scrollbar-hide::-webkit-scrollbar {
-		display: none; /* Chrome, Safari, Opera*/
-	}
-	.marquee {
-		display: inline-block;
-		white-space: nowrap;
-		padding-left: 100%;
-		animation: marquee-scroll 8s linear infinite;
-	}
-	@keyframes marquee-scroll {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-100%);
-		}
-	}
 }
 
 @theme inline {
