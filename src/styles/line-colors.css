@@ -1,0 +1,183 @@
+@layer base {
+	:root {
+		--line-color-1: #004a85;
+		--line-color-2: #00a23f;
+		--line-color-3: #ed6c00;
+		--line-color-4: #009bce;
+		--line-color-5: #794698;
+		--line-color-6: #7c4932;
+		--line-color-7: #6e7e31;
+		--line-color-8: #d11d70;
+		--line-color-9: #a49d87;
+		--line-color-gyeongui-jungang: #6ac2b3;
+		--line-color-shinbundang: #b81b30;
+		--line-color-suin-bundang: #eca300;
+		--line-color-airport-railroad: #0079ac;
+		--line-color-Incheon-line-1: #b4c7e7;
+		--line-color-gtx-a: #9f628c;
+		--line-color-uijeongbu-lrt: #f0831e;
+		--line-color-ui-sinseol: #bacc50;
+		--line-color-gimpo-goldline: #957326;
+		--line-color-Incheon-line-2: #f4a462;
+		--line-color-yongin-everline: #44a436;
+		--line-color-sillim: #5e7dbb;
+		--line-color-gyengchun: #007a62;
+		--line-color-gyenggang: #0b318f;
+		--line-color-seohae: #5eac41;
+		--line-color-default: #636363;
+	}
+}
+
+@layer utilities {
+	.bg-line-1 {
+		background-color: var(--line-color-1);
+	}
+	.bg-line-2 {
+		background-color: var(--line-color-2);
+	}
+	.bg-line-3 {
+		background-color: var(--line-color-3);
+	}
+	.bg-line-4 {
+		background-color: var(--line-color-4);
+	}
+	.bg-line-5 {
+		background-color: var(--line-color-5);
+	}
+	.bg-line-6 {
+		background-color: var(--line-color-6);
+	}
+	.bg-line-7 {
+		background-color: var(--line-color-7);
+	}
+	.bg-line-8 {
+		background-color: var(--line-color-8);
+	}
+	.bg-line-9 {
+		background-color: var(--line-color-9);
+	}
+	.bg-line-gyeongui-jungang {
+		background-color: var(--line-color-gyeongui-jungang);
+	}
+	.bg-line-shinbundang {
+		background-color: var(--line-color-shinbundang);
+	}
+	.bg-line-suin-bundang {
+		background-color: var(--line-color-suin-bundang);
+	}
+	.bg-line-airport-railroad {
+		background-color: var(--line-color-airport-railroad);
+	}
+	.bg-line-Incheon-line-1 {
+		background-color: var(--line-color-Incheon-line-1);
+	}
+	.bg-line-gtx-a {
+		background-color: var(--line-color-gtx-a);
+	}
+	.bg-line-uijeongbu-lrt {
+		background-color: var(--line-color-uijeongbu-lrt);
+	}
+	.bg-line-ui-sinseol {
+		background-color: var(--line-color-ui-sinseol);
+	}
+	.bg-line-gimpo-goldline {
+		background-color: var(--line-color-gimpo-goldline);
+	}
+	.bg-line-Incheon-line-2 {
+		background-color: var(--line-color-Incheon-line-2);
+	}
+	.bg-line-yongin-everline {
+		background-color: var(--line-color-yongin-everline);
+	}
+	.bg-line-sillim {
+		background-color: var(--line-color-sillim);
+	}
+	.bg-line-gyengchun {
+		background-color: var(--line-color-gyengchun);
+	}
+	.bg-line-gyenggang {
+		background-color: var(--line-color-gyenggang);
+	}
+	.bg-line-seohae {
+		background-color: var(--line-color-seohae);
+	}
+	.bg-line-default {
+		background-color: var(--line-color-default);
+	}
+
+	.border-line-1 {
+		border-color: var(--line-color-1);
+	}
+	.border-line-2 {
+		border-color: var(--line-color-2);
+	}
+	.border-line-3 {
+		border-color: var(--line-color-3);
+	}
+	.border-line-4 {
+		border-color: var(--line-color-4);
+	}
+	.border-line-5 {
+		border-color: var(--line-color-5);
+	}
+	.border-line-6 {
+		border-color: var(--line-color-6);
+	}
+	.border-line-7 {
+		border-color: var(--line-color-7);
+	}
+	.border-line-8 {
+		border-color: var(--line-color-8);
+	}
+	.border-line-9 {
+		border-color: var(--line-color-9);
+	}
+	.border-line-gyeongui-jungang {
+		border-color: var(--line-color-gyeongui-jungang);
+	}
+	.border-line-shinbundang {
+		border-color: var(--line-color-shinbundang);
+	}
+	.border-line-suin-bundang {
+		border-color: var(--line-color-suin-bundang);
+	}
+	.border-line-airport-railroad {
+		border-color: var(--line-color-airport-railroad);
+	}
+	.border-line-Incheon-line-1 {
+		border-color: var(--line-color-Incheon-line-1);
+	}
+	.border-line-gtx-a {
+		border-color: var(--line-color-gtx-a);
+	}
+	.border-line-uijeongbu-lrt {
+		border-color: var(--line-color-uijeongbu-lrt);
+	}
+	.border-line-ui-sinseol {
+		border-color: var(--line-color-ui-sinseol);
+	}
+	.border-line-gimpo-goldline {
+		border-color: var(--line-color-gimpo-goldline);
+	}
+	.border-line-Incheon-line-2 {
+		border-color: var(--line-color-Incheon-line-2);
+	}
+	.border-line-yongin-everline {
+		border-color: var(--line-color-yongin-everline);
+	}
+	.border-line-sillim {
+		border-color: var(--line-color-sillim);
+	}
+	.border-line-gyengchun {
+		border-color: var(--line-color-gyengchun);
+	}
+	.border-line-gyenggang {
+		border-color: var(--line-color-gyenggang);
+	}
+	.border-line-seohae {
+		border-color: var(--line-color-seohae);
+	}
+	.border-line-default {
+		border-color: var(--line-color-default);
+	}
+}
